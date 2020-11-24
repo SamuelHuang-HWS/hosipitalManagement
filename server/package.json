@@ -1,0 +1,26 @@
+{
+  "name": "admin_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start":"nodemon --exec babel-node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.7.0",
+    "koa-body": "^4.1.0",
+    "koa-router": "^7.4.0",
+    "koa2-cors": "^2.0.6",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.6",
+    "nodemon": "^2.0.4"
+  }
+}
