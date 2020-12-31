@@ -1,0 +1,40 @@
+.registered{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &-form{
+        width: 500px;
+        height: 500px;
+        background-color: rgba(0, 0, 0, 0.8 );
+        padding:20px;
+        color: white;
+        .form-top{
+            img{
+                width: 100px;
+                height: 100px;
+            }
+            span{
+                margin-top: 10px;
+                display: block;
+                font-size: 24px;
+                font-weight: bold;
+            }
+        }
+        .demo-ruleForm{
+            margin-right: 70px;
+            .el-form-item{
+                margin-top: 20px;
+                &__label{
+                    color: wheat;
+                }
+            }
+        }
+    }
+    -webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+    color: rgba(255, 255, 255, .95) ;
+    height:100%
+    
+}
