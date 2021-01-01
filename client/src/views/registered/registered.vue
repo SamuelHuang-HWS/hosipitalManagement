@@ -39,7 +39,7 @@
             >提交</el-button
           >
           <el-button @click="resetForm('ruleForm')">重置</el-button>
-          <el-button @click="returnLogin('ruleForm')">返回登录</el-button>
+          <el-button @click="returnLogin">返回登录</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -52,6 +52,10 @@ export default {
     var checkName = (rule, value, callback) => {
       if (!value) {
         return callback(new Error("名称不能为空！"));
+      }else{
+        console.log(value)
+        this.nameIsExist()
+        callback()  
       }
     };
     var validatePass = (rule, value, callback) => {
@@ -95,7 +99,6 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert("submit!");
         } else {
           console.log("error submit!!");
           return false;
@@ -108,7 +111,13 @@ export default {
     returnLogin() {
       this.$router.push("/login");
     },
+
+    // 姓名是否存在
+    nameIsExist(){
+      console.log("是否存在")
+    }
   },
+
 };
 </script>
 <style scoped lang="scss">

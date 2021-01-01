@@ -22,7 +22,7 @@ module.exports = {
         .set('@c', resolve('src/components'))
         .set('@v', resolve('src/views'))
         .set('@u', resolve('src/utils'))
-  
+        .set('@a', resolve('src/api'))
       // 图片压缩
       config.module
         .rule('images')

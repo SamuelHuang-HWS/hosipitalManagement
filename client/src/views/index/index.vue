@@ -15,6 +15,6 @@ export default {
   mounted() {},
 };
 </script>
-<style scoped >
+<style scoped>
 /* @import url(); 引入css类 */
 </style>
