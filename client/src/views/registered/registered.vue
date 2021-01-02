@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import { nameIsExist } from "@a/index.js"
 export default {
   data() {
     var checkName = (rule, value, callback) => {
@@ -54,8 +55,11 @@ export default {
         return callback(new Error("名称不能为空！"));
       }else{
         console.log(value)
-        this.nameIsExist()
-        callback()  
+        this.nameIsExist(value).then(res=>{
+          callback()
+        }).catch((error)=>{
+          callback(new Error("名称重复！"));
+        })
       }
     };
     var validatePass = (rule, value, callback) => {
@@ -113,8 +117,17 @@ export default {
     },
 
     // 姓名是否存在
-    nameIsExist(){
-      console.log("是否存在")
+    nameIsExist(name){
+      return new Promise((resolve,reject)=>{
+        nameIsExist({
+          a:'11',
+          b:"12"
+        }).then(res=>{
+          resolve(res)
+      }).catch(error=>{
+          reject(error)
+      })
+      })
     }
   },
 
