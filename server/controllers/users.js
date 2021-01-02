@@ -96,3 +96,13 @@ exports.logout = async (ctx, next) => {
     data: 'success'
   }
 }
+
+exports.nameIsExist = async(ctx,next) =>{
+  console.log(ctx);
+  ctx.body = {
+    code: '0000',
+    data: {
+      msg:"success"
+    }
+  }
+}

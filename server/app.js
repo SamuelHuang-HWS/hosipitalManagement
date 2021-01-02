@@ -2,7 +2,6 @@ const Koa = require("koa");
 const cors = require('koa2-cors');
 const Router = require('koa-router');
 const koaBody = require('koa-body');
-
 const usersRouter = require('./routes/user');
 const warehouseRouter = require('./routes/warehouse');
 const orderRouter = require('./routes/order');
@@ -10,6 +9,7 @@ const goodsRouter = require('./routes/goods');
 const driverRouter = require('./routes/driver');
 const buserRouter = require('./routes/buser');
 const taskRouter = require('./routes/task');
+const registeredRouter = require('./routes/registered');
 
 
 //初始化Koa
@@ -18,7 +18,7 @@ const app = new Koa();
 
 //初始化路由
 const router = new Router({
-    prefix: "/ims",
+    prefix: "/hospital",
 })
 
 
@@ -38,6 +38,7 @@ app.use(koaBody());
 
 
 //配置控制器相应路由
+router.use('/registered',registeredRouter.routes());
 router.use('/user', usersRouter.routes());
 router.use('/warehouse',warehouseRouter.routes());
 router.use('/order',orderRouter.routes());

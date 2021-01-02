@@ -11,6 +11,8 @@ router.get("/info", User.info);
 
 router.post("/logout",User.logout);
 
+router.post("/nameIsExist",User.nameIsExist)
+
 //动态接口设计
 router.get('/list/:name',async ctx =>{
   ctx.body={
