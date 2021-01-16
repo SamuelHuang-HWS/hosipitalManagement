@@ -47,14 +47,13 @@
 </template>
 
 <script>
-import { nameIsExist } from "@a/index.js"
+import { nameIsExist,adminRegistered } from "@a/registered.js"
 export default {
   data() {
     var checkName = (rule, value, callback) => {
       if (!value) {
         return callback(new Error("名称不能为空！"));
       }else{
-        console.log(value)
         this.nameIsExist(value).then(res=>{
           callback()
         }).catch((error)=>{
@@ -103,6 +102,39 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          console.log(this.ruleForm);
+          adminRegistered(this.ruleForm).then(res=>{
+            const h = this.$createElement;
+            this.$msgbox({
+              title: '注册成功',
+              message: h('p', null, [
+                h('span', null, '账号为： '),
+                h('i', { style: 'color: teal' }, res.id),
+                h('div',{style:'color:red;font-size:12px'},'点击确定后会跳转登录页...')
+              ]),
+              showCancelButton: false,
+              confirmButtonText: '确定',
+              cancelButtonText: '取消',
+              beforeClose: (action, instance, done) => {
+                if (action === 'confirm') {
+                  instance.confirmButtonLoading = true;
+                  instance.confirmButtonText = '跳转中...';
+                  setTimeout(() => {
+                    done();
+                    setTimeout(() => {
+                      instance.confirmButtonLoading = false;
+                    }, 300);
+                  }, 1000);
+                } else {
+                  done();
+                }
+              }
+            }).then(action => {
+              this.$router.push('/login')
+            });
+          }).catch(error=>{
+            console.log(error)
+          })
         } else {
           console.log("error submit!!");
           return false;
@@ -120,8 +152,7 @@ export default {
     nameIsExist(name){
       return new Promise((resolve,reject)=>{
         nameIsExist({
-          a:'11',
-          b:"12"
+          name:name,
         }).then(res=>{
           resolve(res)
       }).catch(error=>{

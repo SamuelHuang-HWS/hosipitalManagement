@@ -4,14 +4,14 @@ function request (url,body) {
   let data = {
     body
   }
+  console.log(data,"data-test")
   return axios.request({
     url:url,
-    data: data,
+    data,
     method: 'post'
   })
 }
-// 注册-姓名重复验证
-export function nameIsExist(body) {
-  return request('/registered/nameIsExist', body);
-}
+
+export default request
+
 

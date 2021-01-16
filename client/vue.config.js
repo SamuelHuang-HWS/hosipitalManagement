@@ -24,17 +24,17 @@ module.exports = {
         .set('@u', resolve('src/utils'))
         .set('@a', resolve('src/api'))
       // 图片压缩
-      config.module
-        .rule('images')
-        .use('image-webpack-loader')
-        .loader('image-webpack-loader')
-        .options({
-          mozjpeg: { progressive: true, quality: 65 },
-          optipng: { enabled: false },
-          pngquant: { quality: [0.65, 0.9], speed: 4 },
-          gifsicle: { interlaced: false },
-          webp: { quality: 75 }
-        })
+      // config.module
+      //   .rule('images')
+      //   .use('image-webpack-loader')
+      //   .loader('image-webpack-loader')
+      //   .options({
+      //     mozjpeg: { progressive: true, quality: 65 },
+      //     optipng: { enabled: false },
+      //     pngquant: { quality: [0.65, 0.9], speed: 4 },
+      //     gifsicle: { interlaced: false },
+      //     webp: { quality: 75 }
+      //   })
   
       // 最小化代码
       config.optimization.minimize(true)
@@ -83,7 +83,7 @@ module.exports = {
     devServer: {
       open: true,
       hot: true,
-      host: process.env.BASE_URL,
+      host: '127.0.0.1',
       port: 80,
     //   https:true,
       disableHostCheck: true,

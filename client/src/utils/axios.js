@@ -3,7 +3,6 @@ import axiosRetry from 'axios-retry'
 import Cookie from '../utils/cookie'
 import qs from "qs"
 import {
-    queryParams,
     goLogin,
 } from '@/utils/tools'
 
@@ -20,10 +19,10 @@ class HttpRequest {
             baseURL: this.baseUrl,
             headers: {
                 'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                'Content-Type': 'application/json;charset=UTF-8'
             },
             timeout: 6000,
-            withCredentials: false
+            withCredentials: true
         }
         return config
     }
@@ -40,7 +39,6 @@ class HttpRequest {
         instance.interceptors.request.use(config => {
             //   var ticket = Cookie.getCookie("role");
             //   Cookie.setCookie("ticket",ticket);
-            console.log(url, 'url');
             this.queue[url] = true
             return config
         }, error => {
@@ -56,7 +54,7 @@ class HttpRequest {
             if (result.code === '1023') { // 未登录
                 goLogin() // 跳转到登录页
                 return false
-            } else if (result.code === '0000') { // 请求成功
+            } else if (result.code == '0000') { // 请求成功
                 return result.data || result
             } else { // 请求失败
                 return Promise.reject(result)
@@ -76,14 +74,11 @@ class HttpRequest {
                 return retryCount * 1000
             }
         })
-        const body = options.data.body
-        console.log(body);
         options = Object.assign(this.getInsideConfig(), options)
         options.params && (options.params._t = new Date().getTime())
         options.data && (options.data._t = new Date().getTime())
-        options.data.body && (options.data.body = JSON.stringify(options.data.body))
-        options.data && (options.data = qs.stringify(options.data))
-        // options.data.body = body
+        // options.data.body && (options.data.body = JSON.stringify(options.data.body))
+        // options.data && (options.data = qs.stringify(options.data))
         this.interceptors(instance, options.url)
         return instance(options)
     }
