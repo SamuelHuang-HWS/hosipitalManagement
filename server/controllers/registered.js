@@ -5,8 +5,11 @@ const router = new Router();
 
 
 
+// 注册-名册是否存在
+router.post("/nameIsExist",Registered.nameIsExist)
 
-router.get("/nameIsExist",Registered.nameIsExist)
+// 注册-管理员注册
+router.post("/adminRegistered",Registered.adminRegistered)
 
 
   

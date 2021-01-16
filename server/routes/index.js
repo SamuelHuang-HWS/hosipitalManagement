@@ -20,9 +20,8 @@ fs.readdirSync(path.join(__dirname,'..','controllers')).forEach((file) => {
     if (~file.indexOf('.js')) {
         let controller = require(path.join(__dirname,'..','controllers', file));
         let fileName = utils.splitFileName(file)
-        console.log(`/${fileName.name}`)
         // 为接口设置通用前缀
-        router.use(`/${fileName.name}`, controller.routes(), controller.allowedMethods());
+        router.use(`/${fileName.name}`, controller.routes());
     }
 });
 module.exports = router;

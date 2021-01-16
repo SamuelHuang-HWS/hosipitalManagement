@@ -1,24 +1,29 @@
 const Registered = require('../models/registered_model')
 const jsonResult = require('../utils/JSON')
+const Cookie = require('../utils/cookie')
 
 
-exports.nameIsExist = async (ctx) => {
+exports.nameIsExist = async (ctx,next) => {
     try {
-        console.log(ctx.request)
-        let res = await Registered.nameIsExist({admin_name: '超级管理员'})
-        ctx.cookies.set('username', 'lisa', {
-                domain: 'localhost',
-                path: '/',   //cookie写入的路径
-                maxAge: 1000 * 60 * 60 * 1,
-                expires: new Date('2021-07-06'),
-                httpOnly: false,
-                overwrite: false
-            }
-        );
-        ctx.body = jsonResult.resultSuccessJson(undefined, undefined, res)
+        let { body } = ctx.request.body;
+        let res = await Registered.nameIsExist({admin_name: body.name});
+        ctx.body = jsonResult.resultSuccessJson(undefined, undefined, res);
     } catch (error) {
         console.log(error)
-        ctx.body = jsonResult.resultErrorJson(undefined, error, {});
+        ctx.body = jsonResult.resultErrorJson(undefined, undefined);
+    }
+}
+
+exports.adminRegistered = async (ctx,next) => {
+    try{
+        let { body } = ctx.request.body;
+        let { name, pass } = body; 
+        let res = await Registered.adminRegistered({name:name,pass:pass});
+        if(res.insertId){
+            ctx.body = jsonResult.resultSuccessJson(undefined, undefined, {id:res.insertId});
+        }
+    }catch(error){
+        ctx.body = jsonResult.resultErrorJson(undefined, undefined);
     }
 }
 

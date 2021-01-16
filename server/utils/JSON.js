@@ -1,14 +1,13 @@
 module.exports = {
      // 错误JSON
- resultErrorJson:(code=-1,message="失败",data={})=>{
+ resultErrorJson:(code='0001',message="失败")=>{
     return {
         code:code,
-        data:data,
         message:message
     }
 },
 // 成功JSON
-resultSuccessJson:(code=0,message="成功",data={})=>{
+resultSuccessJson:(code='0000',message="成功",data={})=>{
     return {
         code:code,
         data:data,

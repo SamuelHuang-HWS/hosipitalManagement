@@ -5,8 +5,6 @@ const http = require("http");
 const koaJson = require('koa-json');  // get提交数据的中间件
 const bodyParser = require('koa-bodyparser');  // post提交数据中间件
 const routes = require('./routes')
-// const registeredRouter = require('./routes/registered');
-
 
 //初始化Koa
 const app = new Koa();
@@ -27,16 +25,15 @@ app.use(cors({
     credentials: true  //允许携带cookie跨域
 }));
 
-
 //格式化请求参数
-app.use(bodyParser());
-app.use(koaJson());
 app.use(koaBody({
     multipart: true,
     formidable: {
         maxFileSize: config.LIMIT.UPLOAD_IMG_SIZE    // 设置上传文件大小最大限制，默认2M
     }
 }));
+app.use(koaJson());
+app.use(bodyParser());
 
 //使用router·
 app.use(routes.routes());

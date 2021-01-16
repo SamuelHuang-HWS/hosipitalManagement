@@ -49,3 +49,5 @@ exports.getAllFiles = async(ctx)=>{
         ctx.body = util.resultSuccessJson(undefined,undefined,result);    } catch (err) {
         ctx.body = util.resultErrorJson(undefined,err,{});    }
 }
+
+
