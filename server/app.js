@@ -38,7 +38,6 @@ app.use(bodyParser());
 //使用router·
 app.use(routes.routes());
 
-
 //创建监听
 // app.listen(3000);
 http.createServer(app.callback())

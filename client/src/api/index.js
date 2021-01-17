@@ -4,7 +4,6 @@ function request (url,body) {
   let data = {
     body
   }
-  console.log(data,"data-test")
   return axios.request({
     url:url,
     data,
